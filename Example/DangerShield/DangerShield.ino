@@ -11,7 +11,8 @@
  It demonstrates each feature of the shield. Move one of the sliders to get a different sound out of the buzzer. 
  Move another slider to change the digit being displayed on the seven segment display. Move the last slider to 
  change the brightness of one of the two status LEDs. Press one of the large buttons to toggle on/off the status LED. 
- Cover the light sensor to 'scare' the unit.
+ Cover the light sensor to 'scare' the unit. Open a terminal window at 57600bps if you'd like to see the
+ values change over the serial connection.
 
  This code works best with product SKU 10115: https://www.sparkfun.com/products/10115
 
@@ -57,22 +58,23 @@ void setup()
 {
   Serial.begin(57600);
   
-  pinMode(BUTTON1,INPUT);
-  pinMode(BUTTON2,INPUT);
-  pinMode(BUTTON3,INPUT);
-  
-  digitalWrite(BUTTON1,HIGH);
-  digitalWrite(BUTTON2,HIGH);
-  digitalWrite(BUTTON3,HIGH);
-  
+  //Initialize inputs and outputs
+  pinMode(BUTTON1, INPUT);
+  pinMode(BUTTON2, INPUT);
+  pinMode(BUTTON3, INPUT);
+
   pinMode(BUZZER, OUTPUT);
   pinMode(LED1, OUTPUT);
   pinMode(LED2, OUTPUT);
-  digitalWrite(LED1,HIGH);
-  digitalWrite(LED2,HIGH);
+
   pinMode(LATCH, OUTPUT);
   pinMode(CLOCK, OUTPUT);
-  pinMode(DATA,OUTPUT);
+  pinMode(DATA, OUTPUT);
+
+  //Enable internal pullups
+  digitalWrite(BUTTON1, HIGH);
+  digitalWrite(BUTTON2, HIGH);
+  digitalWrite(BUTTON3, HIGH);
 
   Serial.println("Danger Shield Component Test");  
   
@@ -81,21 +83,13 @@ void setup()
   for(int x = 0 ; x < 16 ; x++)
     avgLightLevel += analogRead(LIGHT);
   avgLightLevel /= 16;
-
   Serial.print("Avg: ");
-  Serial.print(avgLightLevel);
-  
+  Serial.println(avgLightLevel);
+ 
 }
 
 void loop()
 {
-  if(digitalRead(BUTTON1) == LOW) {
-    Serial.println("Button 1!");
-    digitalWrite(LED1, HIGH);
-  }
-  else
-    digitalWrite(LED1, LOW);
-
   //Read inputs
   int val1 = analogRead(SLIDER1);
   int val2 = analogRead(SLIDER2);
@@ -103,6 +97,7 @@ void loop()
   int lightLevel = analogRead(LIGHT);
   int temp = analogRead(TEMP);
 
+  //Display values for debugging
   Serial.print("Sliders: ");
   Serial.print(" ");
   Serial.print(val1);
@@ -113,29 +108,40 @@ void loop()
   Serial.print("  ");
   Serial.print(lightLevel);
   
+  //If user is hitting button 1, turn on LED 1
+  if(digitalRead(BUTTON1) == LOW)
+  {
+    Serial.println("Button 1!");
+    digitalWrite(LED1, HIGH);
+  }
+  else
+    digitalWrite(LED1, LOW);
+
   Serial.println();
   
-  int ledLevel = map(val1, 0, 1020, 0, 255);
-  int numToDisplay = map(val2, 0, 1020, 0, 9);
-  long buzSound = map(val3, 0, 1020, 1000, 10000);
-  
-  //Set outputs
+  //Set the brightness on LED #2 (D6)
+  int ledLevel = map(val1, 0, 1020, 0, 255); //Map the slider level to a value we can set on the LED
+  analogWrite(LED2, ledLevel); //Set LED brightness
+
+  //Set 7 segment display based on the 2nd slider
+  int numToDisplay = map(val2, 0, 1020, 0, 9); //Map the slider value to a displayable value
+  digitalWrite(LATCH, LOW);
+  shiftOut(DATA, CLOCK, MSBFIRST, ~(ledCharSet[numToDisplay]));
+  digitalWrite(LATCH, HIGH);
+
+  //Set the sound based on the 3rd slider
+  long buzSound = map(val3, 0, 1020, 1000, 10000); //Map the slider value to an audible frequency
   if(buzSound > 1100)
     tone(BUZZER, buzSound); //Set sound value
   else
     noTone(BUZZER);
   
-  analogWrite(6, ledLevel); //Set LED brightness
-
-  //Set 7 segment display
-  digitalWrite(LATCH,LOW);
-  shiftOut(DATA, CLOCK, MSBFIRST, ~(ledCharSet[numToDisplay]));
-  digitalWrite(LATCH,HIGH);
-  
-  //If light sensor is covered up, freak out
-  while(lightLevel < (avgLightLevel * 3 / 4)) {
-    
-    if(digitalRead(LED1) == LOW){
+  //If light sensor is less than 3/4 of the average (covered up) then freak out
+  while(lightLevel < (avgLightLevel * 3 / 4))
+  {
+    //Blink the status LEDs back and forth
+    if(digitalRead(LED1) == LOW)
+    {
       digitalWrite(LED1, HIGH);
       digitalWrite(LED2, LOW);
     }
@@ -144,12 +150,15 @@ void loop()
       digitalWrite(LED2, HIGH);
     }
 
-    digitalWrite(LATCH,LOW);
+    //Display an increasing number on the 7-segment display
+    digitalWrite(LATCH, LOW);
     shiftOut(DATA, CLOCK, MSBFIRST, ~(ledCharSet[numToDisplay]));
-    digitalWrite(LATCH,HIGH);
-    numToDisplay++;
-    if(numToDisplay > 9) numToDisplay = 0;
+    digitalWrite(LATCH, HIGH);
+    numToDisplay++; //Goto next number
+    if(numToDisplay > 9) numToDisplay = 0; //Loop number
 
+    //Play a horrendously annoying sound
+    //Frequency increases with each loop
     tone(BUZZER, buzSound);
     buzSound += 100;
     if(buzSound > 3000) buzSound = 1000;

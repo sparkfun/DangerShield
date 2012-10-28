@@ -4697,8 +4697,8 @@ We've spent an enormous amount of time creating and checking these footprints an
 <text x="220.98" y="109.22" size="1.778" layer="97">Power</text>
 <text x="25.4" y="172.72" size="1.778" layer="97">Light Sensor</text>
 <text x="142.748" y="95.758" size="1.778" layer="94">Cap Sense</text>
-<text x="33.02" y="15.24" size="1.778" layer="97">Chris Taylor</text>
-<text x="15.24" y="12.7" size="1.778" layer="97">Original design: Zach Hoeken</text>
+<text x="33.02" y="7.62" size="1.778" layer="97">Chris Taylor</text>
+<text x="15.24" y="5.08" size="1.778" layer="97">Original design: Zach Hoeken</text>
 </plain>
 <instances>
 <instance part="R20" gate="G$1" x="17.78" y="71.12"/>
@@ -4778,7 +4778,7 @@ We've spent an enormous amount of time creating and checking these footprints an
 <instance part="P+11" gate="1" x="93.98" y="165.1"/>
 <instance part="GND10" gate="1" x="93.98" y="149.86"/>
 <instance part="P+12" gate="1" x="149.86" y="170.18"/>
-<instance part="U$1" gate="G$1" x="15.24" y="15.24"/>
+<instance part="U$1" gate="G$1" x="15.24" y="7.62"/>
 </instances>
 <busses>
 </busses>

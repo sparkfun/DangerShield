@@ -4640,7 +4640,7 @@ Standard 0603 ceramic capacitor, and 0.1" leaded capacitor.</description>
 <part name="S3" library="SparkFun" deviceset="SWITCH-MOMENTARY-2" device="12MM"/>
 <part name="S2" library="SparkFun" deviceset="SWITCH-MOMENTARY-2" device="12MM"/>
 <part name="S5" library="SparkFun" deviceset="SWITCH-MOMENTARY-2" device="12MM"/>
-<part name="S4" library="SparkFun" deviceset="SWITCH-MOMENTARY-2" device="PTH"/>
+<part name="S4" library="SparkFun" deviceset="SWITCH-MOMENTARY-2" device="PTH" value="Reset"/>
 <part name="GND18" library="SparkFun" deviceset="GND" device=""/>
 <part name="U1" library="SparkFun" deviceset="ARDUINO_SHIELD" device="NO_SILK"/>
 <part name="P+13" library="SparkFun" deviceset="VCC" device=""/>
