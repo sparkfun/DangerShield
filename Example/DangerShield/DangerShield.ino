@@ -7,7 +7,7 @@
  This code is public domain but you buy me a beer if you use this and we meet someday (Beerware license).
  The project is OSHW and the schematic is released under Creative Commons Share Alike w/ Attribution v3.0
  
- This is the example code for the Danger Shield product by SparkFun Electronics. 
+ This is the example code, created in Arduino v1.0.1 for the Danger Shield product by SparkFun Electronics. 
  It demonstrates each feature of the shield. Move one of the sliders to get a different sound out of the buzzer. 
  Move another slider to change the digit being displayed on the seven segment display. Move the last slider to 
  change the brightness of one of the two status LEDs. Press one of the large buttons to toggle on/off the status LED. 
