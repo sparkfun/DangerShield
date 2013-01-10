@@ -11,4 +11,4 @@ Chris Taylor, Nathan Seidle 2012
 Spark Fun Electronics
 This code is public domain but you buy me a beer if you use this and we meet someday (Beerware license).
 The hardware is released under Creative Commons Share Alike w/ Attribution v3.0
-The project is open source hardware so please feel free to do anything you want with it. 
+The project is open source hardware so please feel free to do anything you want with it.
