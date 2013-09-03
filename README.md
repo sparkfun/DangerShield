@@ -8,6 +8,11 @@ This is the layout and example code for the Danger Shield product by SparkFun El
 
 The idea of a Danger Shield was originally created by Zach Hoeken ([http://www.zachhoeken.com/](http://www.zachhoeken.com/))
 
+Repository Contents
+-------------------
+* **/Firmware** - Example Arduino Sketch
+* **/Hardware** - All Eagle design files (.brd, .sch)
+
 Product History
 ---------------
 
