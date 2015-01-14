@@ -165,17 +165,17 @@ void loop()
   Serial.println();
 
   //Set the brightness on LED #2 (D6) based on slider 1
-  int ledLevel = map(val1, 0, 1020, 0, 255); //Map the slider level to a value we can set on the LED
+  int ledLevel = map(val1, 0, 1023, 0, 255); //Map the slider level to a value we can set on the LED
   analogWrite(LED2, ledLevel); //Set LED brightness
 
   //Set 7 segment display based on the 2nd slider
-  int numToDisplay = map(val2, 0, 1020, 0, 9); //Map the slider value to a displayable value
+  int numToDisplay = map(val2, 0, 1023, 0, 9); //Map the slider value to a displayable value
   digitalWrite(LATCH, LOW);
   shiftOut(DATA, CLOCK, MSBFIRST, ~(ledCharSet[numToDisplay]));
   digitalWrite(LATCH, HIGH);
 
   //Set the sound based on the 3rd slider
-  long buzSound = map(val3, 0, 1020, 1000, 10000); //Map the slider value to an audible frequency
+  long buzSound = map(val3, 0, 1023, 1000, 10000); //Map the slider value to an audible frequency
   if(buzSound > 1100)
     tone(BUZZER, buzSound); //Set sound value
   else
