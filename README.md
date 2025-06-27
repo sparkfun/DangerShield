@@ -1,7 +1,7 @@
 Danger Shield
 =============
 
-[![Danger Shield](https://dlnmh9ip6v2uc.cloudfront.net/images/products/1/0/5/7/0/10570-01_i_ma.jpg)  
+[![Danger Shield](https://cdn.sparkfun.com/assets/parts/5/2/0/0/10570-01.jpg)  
 *Danger Shield (DEV-10570)*](https://www.sparkfun.com/products/10570)
 
 This is the layout and example code for the Danger Shield product by SparkFun Electronics. It demonstrates each feature of the shield. Move one of the sliders to get a different sound out of the buzzer. Move another slider to change the digit being displayed on the seven segment display. Move the last slider to change the brightness of one of the two status LEDs. Press one of the large buttons to toggle on/off the status LED. Cover the light sensor to 'scare' the unit.
